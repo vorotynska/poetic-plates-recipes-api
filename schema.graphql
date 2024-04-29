@@ -32,6 +32,12 @@ type Recipe {
   ingredients: [Ingredient]
   "A list of recipes that is related to this particular one, for discoverability"
   relatedRecipes: [Recipe]
+  "List of cookware used in the recipe"
+  cookware: [Cookware]
+}
+
+type Cookware @key(fields: "name", resolvable: false) {
+  name: String!
 }
 
 type Ingredient {
@@ -40,6 +46,8 @@ type Ingredient {
   name: String
   "A potential substitute for the ingredient, if available"
   substitute: String
+  "Display text for the ingredient"
+text: String @deprecated(reason: "Use detailedDescription")
   """
 A detailed description of the ingredient needed in the recipe.
 Usually in the format of: <QUANTITY> <INGREDIENT NAME>, <SPECIAL INSTRUCTIONS>.
